@@ -12,6 +12,7 @@ import 'package:syphon/global/values.dart';
 import 'package:syphon/storage/index.dart';
 import 'package:syphon/store/events/messages/model.dart';
 import 'package:syphon/store/events/messages/schema.dart';
+import 'package:syphon/store/user/model.dart';
 import 'package:syphon/store/user/schema.dart';
 
 part 'database.g.dart';

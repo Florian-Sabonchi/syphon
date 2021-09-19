@@ -88,7 +88,12 @@ dependencies:
 
   # cache/storage
   sembast: ^3.0.1
-  sqflite: ^2.0.0+3
+  # sqflite: ^2.0.0+3
+  sqflite:
+    git:
+      url: https://www.github.com/davidmartos96/sqflite_sqlcipher.git
+      path: sqflite
+      ref: fmdb_override
   sqlite3: ^1.0.0
   sembast_sqflite: ^2.0.0+1
   sqflite_common_ffi: ^2.0.0

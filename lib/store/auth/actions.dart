@@ -1094,14 +1094,14 @@ ThunkAction<AppState> deactivateAccount() => (Store<AppState> store) async {
         final currentCredential = store.state.authStore.credential ?? Credential();
 
         final user = store.state.authStore.user;
-        final idServer = user.idserver;
-        final homeserver = user.homeserver;
+        final baseUrl = user.homeserver;
+        final identityUrl = user.idserver;
 
         final data = await MatrixApi.deactivateUser(
           protocol: store.state.authStore.protocol,
-          homeserver: homeserver,
+          homeserver: baseUrl,
           accessToken: user.accessToken,
-          identityServer: idServer ?? homeserver,
+          identityServer: identityUrl ?? baseUrl,
           session: store.state.authStore.authSession,
           userId: user.userId,
           authType: MatrixAuthTypes.PASSWORD,

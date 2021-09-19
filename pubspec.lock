@@ -873,9 +873,11 @@ packages:
   sqflite:
     dependency: "direct main"
     description:
-      name: sqflite
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: sqflite
+      ref: fmdb_override
+      resolved-ref: b45da6460b235ad32a1b24653a7b2aa37515605a
+      url: "https://www.github.com/davidmartos96/sqflite_sqlcipher.git"
+    source: git
     version: "2.0.0+3"
   sqflite_common:
     dependency: transitive

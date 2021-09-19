@@ -3,9 +3,9 @@ import 'package:syphon/storage/moor/database.dart';
 import 'package:syphon/store/user/model.dart';
 
 ///
-/// Messages Model (Table)
+/// Users Model (Table)
 ///
-/// Meant to store messages in _cold storage_
+/// Meant to store users in _cold storage_
 /// using Moor and SQLite + SQLCipher
 ///
 @UseRowClass(User)

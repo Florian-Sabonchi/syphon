@@ -158,38 +158,6 @@ class Message extends Event implements moor.Insertable<Message> {
         reactions: reactions ?? this.reactions,
       );
 
-  // allows converting to message companion type for saving through moor
-  @override
-  Map<String, moor.Expression> toColumns(bool nullToAbsent) {
-    return MessagesCompanion(
-      id: moor.Value(id!),
-      userId: moor.Value(userId),
-      roomId: moor.Value(roomId),
-      type: moor.Value(type),
-      sender: moor.Value(sender),
-      stateKey: moor.Value(stateKey),
-      syncing: moor.Value(syncing),
-      pending: moor.Value(pending),
-      failed: moor.Value(failed),
-      replacement: moor.Value(replacement),
-      edited: moor.Value(edited),
-      timestamp: moor.Value(timestamp),
-      received: moor.Value(received),
-      body: moor.Value(body),
-      msgtype: moor.Value(msgtype),
-      format: moor.Value(format),
-      filename: moor.Value(filename),
-      formattedBody: moor.Value(formattedBody),
-      typeDecrypted: moor.Value(typeDecrypted),
-      ciphertext: moor.Value(ciphertext),
-      senderKey: moor.Value(senderKey),
-      deviceId: moor.Value(deviceId),
-      algorithm: moor.Value(algorithm),
-      sessionId: moor.Value(sessionId),
-      relatedEventId: moor.Value(relatedEventId),
-    ).toColumns(nullToAbsent);
-  }
-
   @override
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 
@@ -257,5 +225,37 @@ class Message extends Event implements moor.Insertable<Message> {
         edited: false,
       );
     }
+  }
+
+  // allows converting to message companion type for saving through moor
+  @override
+  Map<String, moor.Expression> toColumns(bool nullToAbsent) {
+    return MessagesCompanion(
+      id: moor.Value(id!),
+      userId: moor.Value(userId),
+      roomId: moor.Value(roomId),
+      type: moor.Value(type),
+      sender: moor.Value(sender),
+      stateKey: moor.Value(stateKey),
+      syncing: moor.Value(syncing),
+      pending: moor.Value(pending),
+      failed: moor.Value(failed),
+      replacement: moor.Value(replacement),
+      edited: moor.Value(edited),
+      timestamp: moor.Value(timestamp),
+      received: moor.Value(received),
+      body: moor.Value(body),
+      msgtype: moor.Value(msgtype),
+      format: moor.Value(format),
+      filename: moor.Value(filename),
+      formattedBody: moor.Value(formattedBody),
+      typeDecrypted: moor.Value(typeDecrypted),
+      ciphertext: moor.Value(ciphertext),
+      senderKey: moor.Value(senderKey),
+      deviceId: moor.Value(deviceId),
+      algorithm: moor.Value(algorithm),
+      sessionId: moor.Value(sessionId),
+      relatedEventId: moor.Value(relatedEventId),
+    ).toColumns(nullToAbsent);
   }
 }
