@@ -12,6 +12,7 @@ import 'package:syphon/global/values.dart';
 import 'package:syphon/storage/index.dart';
 import 'package:syphon/store/events/messages/model.dart';
 import 'package:syphon/store/events/messages/schema.dart';
+import 'package:syphon/store/user/schema.dart';
 
 part 'database.g.dart';
 
@@ -25,11 +26,11 @@ void _openOnAndroid() {
 
 void _openOnLinux() {
   try {
-    final scriptDir = File(Platform.script.toFilePath()).parent;
-    final libraryNextToScript = File('${scriptDir.path}/sqlite3.so');
-    final lib = DynamicLibrary.open(libraryNextToScript.path);
-
-    open.overrideFor(OperatingSystem.linux, () => lib);
+    open.overrideFor(OperatingSystem.linux, () {
+      final execDir = File(Platform.script.toFilePath()).parent;
+      final libraryNextToScript = File('${execDir.path}/sqlite3.so');
+      return DynamicLibrary.open(libraryNextToScript.path);
+    });
   } catch (error) {
     printError(error.toString());
   }
@@ -79,7 +80,7 @@ LazyDatabase openDatabase(String context) {
   });
 }
 
-@UseMoor(tables: [Messages])
+@UseMoor(tables: [Messages, Users])
 class StorageDatabase extends _$StorageDatabase {
   // we tell the database where to store the data with this constructor
   StorageDatabase(String context) : super(openDatabase(context));

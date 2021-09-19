@@ -1,52 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:moor/moor.dart';
 import 'package:sembast/sembast.dart';
 import 'package:syphon/global/print.dart';
 import 'package:syphon/storage/constants.dart';
 import 'package:syphon/storage/moor/database.dart';
 import 'package:syphon/store/events/messages/model.dart';
-
-// example of loading queries separate from the database object
-extension MessageQueries on StorageDatabase {
-  Future<void> insertMessagesBatched(List<Message> messages) {
-    return batch(
-      (batch) => batch.insertAllOnConflictUpdate(
-        this.messages,
-        messages,
-      ),
-    );
-  }
-
-  Future<List<Message>> selectMessages(List<String> ids, {int offset = 0, int limit = 25}) {
-    return (select(messages)
-          ..where((tbl) => tbl.id.isIn(ids))
-          ..limit(25, offset: offset))
-        .get();
-  }
-
-  Future<List<Message>> selectMessagesRoom(String roomId, {int offset = 0, int limit = 25}) {
-    return (select(messages)
-          ..where((tbl) => tbl.roomId.equals(roomId))
-          ..orderBy([(tbl) => OrderingTerm(expression: tbl.timestamp, mode: OrderingMode.desc)])
-          ..limit(25, offset: offset))
-        .get();
-  }
-
-  Future<List<Message>> searchMessageBodys(String text, {int offset = 0, int limit = 25}) {
-    return (select(messages)
-          ..where((tbl) => tbl.body.like('%$text%'))
-          ..limit(25, offset: offset))
-        .get();
-  }
-}
+import 'package:syphon/store/events/messages/schema.dart';
 
 Future<List<Message>> searchMessagesStored(
   String text, {
   required StorageDatabase storage,
 }) {
-  return storage.searchMessageBodys(text);
+  try {
+    return storage.searchMessageBodys(text);
+  } catch (error) {
+    return Future.sync(() => <Message>[]);
+  }
 }
 
 // example of loading queries separate from database declaration

@@ -13,7 +13,7 @@ Future<void> saveUsers(
 }) async {
   final store = StoreRef<String?, String>(StorageKeys.USERS);
 
-  return await storage.transaction((txn) async {
+  return storage.transaction((txn) async {
     for (User user in users.values) {
       final record = store.record(user.userId);
       await record.put(txn, jsonEncode(user));
@@ -22,7 +22,7 @@ Future<void> saveUsers(
 }
 
 /// Load Users (Cold Storage)
-/// 
+///
 /// Example of useful recursion
 Future<Map<String, User>> loadUsers({
   Database? cache,
