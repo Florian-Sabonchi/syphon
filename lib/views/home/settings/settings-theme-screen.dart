@@ -181,6 +181,19 @@ class _ThemeSettingsScreenState extends State<ThemeSettingsScreen> {
                         ListTile(
                           contentPadding: Dimensions.listPadding,
                           title: Text(
+                            'Link Preview',
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          trailing: Switch(
+                            value: props.roomLinkPreviewEnabled,
+                            onChanged: (value) => props.onToggleRoomLinkPreview(),
+                            activeColor: Color(props.primaryColor),
+                          ),
+                          onTap: () => props.onToggleRoomLinkPreview(),
+                        ),
+                        ListTile(
+                          contentPadding: Dimensions.listPadding,
+                          title: Text(
                             'Chat Type Badges',
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
@@ -295,6 +308,7 @@ class _Props extends Equatable {
   final String mainFabLocation;
 
   final bool roomTypeBadgesEnabled;
+  final bool roomLinkPreviewEnabled;
 
   final Function onSelectPrimaryColor;
   final Function onSelectAccentColor;
@@ -304,6 +318,7 @@ class _Props extends Equatable {
   final Function onIncrementMessageSize;
   final Function onIncrementThemeType;
   final Function onToggleRoomTypeBadges;
+  final Function onToggleRoomLinkPreview;
   final Function onIncrementAvatarShape;
 
   const _Props({
@@ -319,6 +334,7 @@ class _Props extends Equatable {
     required this.mainFabType,
     required this.mainFabLocation,
     required this.roomTypeBadgesEnabled,
+    required this.roomLinkPreviewEnabled,
     required this.onSelectPrimaryColor,
     required this.onSelectAccentColor,
     required this.onSelectAppBarColor,
@@ -326,6 +342,7 @@ class _Props extends Equatable {
     required this.onIncrementFontSize,
     required this.onIncrementThemeType,
     required this.onToggleRoomTypeBadges,
+    required this.onToggleRoomLinkPreview,
     required this.onIncrementAvatarShape,
     required this.onIncrementMessageSize,
   });
@@ -341,6 +358,7 @@ class _Props extends Equatable {
         fontSize,
         avatarShape,
         roomTypeBadgesEnabled,
+        roomLinkPreviewEnabled,
         mainFabType,
         mainFabLocation,
       ];
@@ -356,10 +374,14 @@ class _Props extends Equatable {
         messageSize: selectMessageSizeString(store.state.settingsStore.themeSettings.messageSize),
         avatarShape: selectAvatarShapeString(store.state.settingsStore.themeSettings.avatarShape),
         roomTypeBadgesEnabled: store.state.settingsStore.roomTypeBadgesEnabled,
+        roomLinkPreviewEnabled: store.state.settingsStore.roomLinkPreviewEnabled,
         mainFabType: selectMainFabType(store.state.settingsStore.themeSettings),
         mainFabLocation: selectMainFabLocation(store.state.settingsStore.themeSettings),
         onToggleRoomTypeBadges: () => store.dispatch(
           toggleRoomTypeBadges(),
+        ),
+        onToggleRoomLinkPreview: () => store.dispatch(
+          toggleRoomLinkPreview(),
         ),
         onSelectPrimaryColor: (int color) => store.dispatch(
           // convert to int hex color code

@@ -139,6 +139,7 @@ saveStorageMiddleware(StorageDatabase? storage) {
       case ToggleAutocorrect:
       case ToggleSuggestions:
       case ToggleRoomTypeBadges:
+      case ToggleRoomLinkPreview:
       case ToggleMembershipEvents:
       case ToggleNotifications:
       case ToggleTypingIndicators:

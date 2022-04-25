@@ -26,6 +26,7 @@ class SettingsStore extends Equatable {
   final bool typingIndicatorsEnabled;
   final bool membershipEventsEnabled;
   final bool roomTypeBadgesEnabled;
+  final bool roomLinkPreviewEnabled;
   final bool timeFormat24Enabled;
   final bool dismissKeyboardEnabled;
   final bool autoDownloadEnabled;
@@ -60,6 +61,7 @@ class SettingsStore extends Equatable {
     this.typingIndicatorsEnabled = false,
     this.membershipEventsEnabled = true,
     this.roomTypeBadgesEnabled = true,
+    this.roomLinkPreviewEnabled = false,
     this.timeFormat24Enabled = false,
     this.dismissKeyboardEnabled = false,
     this.autoDownloadEnabled = false,
@@ -107,6 +109,7 @@ class SettingsStore extends Equatable {
     bool? typingIndicatorsEnabled,
     bool? membershipEventsEnabled,
     bool? roomTypeBadgesEnabled,
+    bool? roomLinkPreviewEnabled,
     bool? timeFormat24Enabled,
     bool? dismissKeyboardEnabled,
     bool? autoDownloadEnabled,
@@ -134,6 +137,7 @@ class SettingsStore extends Equatable {
         dismissKeyboardEnabled: dismissKeyboardEnabled ?? this.dismissKeyboardEnabled,
         membershipEventsEnabled: membershipEventsEnabled ?? this.membershipEventsEnabled,
         roomTypeBadgesEnabled: roomTypeBadgesEnabled ?? this.roomTypeBadgesEnabled,
+        roomLinkPreviewEnabled: roomLinkPreviewEnabled ?? this.roomLinkPreviewEnabled,
         autoDownloadEnabled: autoDownloadEnabled ?? this.autoDownloadEnabled,
         syncInterval: syncInterval ?? this.syncInterval,
         syncPollTimeout: syncPollTimeout ?? this.syncPollTimeout,

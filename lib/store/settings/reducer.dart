@@ -184,6 +184,10 @@ SettingsStore settingsReducer([SettingsStore state = const SettingsStore(), dyna
       return state.copyWith(
         roomTypeBadgesEnabled: !state.roomTypeBadgesEnabled,
       );
+    case ToggleRoomLinkPreview:
+      return state.copyWith(
+        roomLinkPreviewEnabled: !state.roomLinkPreviewEnabled,
+      );
     case ToggleNotifications:
       return state.copyWith(
         notificationSettings:
